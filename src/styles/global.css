@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Here the initial theme and rules are set
+*/
+
+@theme {
+  --color-duke-blue: rgb(30 58 138);
+  --color-duke-gold: rgb(251 191 36);
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth font-sans antialiased;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+
+  /* Set JetBrains Mono as the default for all code/mono elements */
+  code, pre, .mono {
+    font-family: var(--font-mono) !important;
+  }
+
+  /* Headings stay sharp and professional */
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-tight text-slate-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-duke-blue text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-blue-900/20 hover:opacity-90 transition-all active:scale-95;
+  }
+  
+  .btn-gold {
+    @apply bg-duke-gold text-slate-900 px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-amber-400/20 hover:opacity-90 transition-all active:scale-95;
+  }
+
+  .card-duke {
+    @apply bg-white border border-slate-100 rounded-[1.5rem] p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+}

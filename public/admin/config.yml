@@ -1,0 +1,45 @@
+backend:
+  name: github
+  repo: datawithduke-byte/v2.datawithduke # Update this to your actual GitHub repo path
+  branch: main
+
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["general"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "learn"
+    label: "Lessons"
+    folder: "src/content/learn"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Track", name: "track", widget: "select", options: ["excel", "python", "critical-thinking"] }
+      - { label: "Chapter Number", name: "chapterNumber", widget: "number" }
+      - { label: "Video URL", name: "videoUrl", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "podcast"
+    label: "Podcasts"
+    folder: "src/content/podcast"
+    create: true
+    fields:
+      - { label: "Episode Number", name: "episodeNumber", widget: "number" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "YouTube URL", name: "youtubeUrl", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

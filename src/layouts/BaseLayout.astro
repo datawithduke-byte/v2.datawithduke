@@ -1,0 +1,90 @@
+---
+// This is the "Master Template" for your site.
+// Every page (Blog, Lesson, Podcast) will "wrap" itself inside this layout.
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Data Literacy for the Curious." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Data With Duke</title>
+		
+		<!-- Google Fonts: Inter and JetBrains Mono -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-slate-50 text-slate-900 selection:bg-amber-100 selection:text-amber-900">
+		
+		<!-- Simple Navigation -->
+		<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+			<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+				<a href="/" class="flex items-center space-x-2 group">
+					<div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shadow-blue-900/20">
+						<span class="text-amber-400 font-bold text-xl">D</span>
+					</div>
+					<span class="font-bold text-xl tracking-tight text-blue-900 uppercase">Data With Duke</span>
+				</a>
+				
+				<div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+					<a href="/blog" class="hover:text-blue-900 transition">Blog</a>
+					<a href="/learn" class="hover:text-blue-900 transition">Learn</a>
+					<a href="/podcast" class="hover:text-blue-900 transition">Podcast</a>
+					<a href="/about" class="hover:text-blue-900 transition">About</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main Content Slot -->
+		<main class="page-fade-in">
+			<slot />
+		</main>
+
+		<!-- Professional Footer -->
+		<footer class="bg-white border-t border-slate-200 py-12 mt-20">
+			<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+				<p class="text-slate-400 text-xs tracking-widest uppercase font-bold">
+					&copy; {new Date().getFullYear()} Data With Duke
+				</p>
+				<div class="flex space-x-6 text-xs font-bold text-slate-400 uppercase tracking-widest">
+					<a href="/transparency" class="hover:text-blue-900">AI Transparency</a>
+					<a href="/privacy" class="hover:text-blue-900">Privacy</a>
+					<a href="/terms" class="hover:text-blue-900">Terms</a>
+				</div>
+			</div>
+		</footer>
+
+		<style is:global>
+			/* Custom Duke Scrollbar */
+			::-webkit-scrollbar { width: 8px; }
+			::-webkit-scrollbar-track { background: transparent; }
+			::-webkit-scrollbar-thumb { 
+				background: #cbd5e1; 
+				border-radius: 10px; 
+				border: 2px solid #f8fafc;
+			}
+			::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+			.page-fade-in {
+				animation: fadeIn 0.5s ease-out;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; transform: translateY(10px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+		</style>
+	</body>
+</html>
