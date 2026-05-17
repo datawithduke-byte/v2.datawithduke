@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 1. Fetch all lessons
+const allLessons = await getCollection('learn');
+
+// 2. Sort by chapter number
+const sortedLessons = allLessons.sort((a, b) => a.data.chapterNumber - b.data.chapterNumber);
+
+// 3. Group by track with explicit typing to stop the errors
+// Record<string, any[]> tells TypeScript: "This is an object with string keys and array values"
+const lessonsByTrack = sortedLessons.reduce((acc: Record<string, any[]>, lesson) => {
+  const track = lesson.data.track || 'General'; // Pulls 'track' from your schema
+  if (!acc[track]) {
+    acc[track] = [];
+  }
+  acc[track].push(lesson);
+  return acc;
+}, {});
+
+// Get the track names (keys) to loop through them
+const tracks = Object.keys(lessonsByTrack);
+---
+
+<BaseLayout title="Learn | Data With Duke">
+  <div class="max-w-6xl mx-auto px-4 py-16">
+    <header class="mb-16">
+      <h1 class="text-5xl font-black text-duke-blue mb-4">Curriculum</h1>
+      <p class="text-xl text-slate-600 max-w-2xl">
+        Structured tracks to help you master the data tools that matter, from spreadsheets to Python.
+      </p>
+    </header>
+
+    <div class="space-y-16">
+      {tracks.map(track => (
+        <section>
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-2xl font-bold capitalize text-slate-900">{track}</h2>
+            <div class="h-px flex-1 bg-slate-200"></div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {lessonsByTrack[track].map(lesson => (
+              <a 
+                href={`/learn/${lesson.slug}`} 
+                class="card-duke group flex flex-col justify-between"
+              >
+                <div>
+                  <div class="flex justify-between items-start mb-4">
+                    <span class="text-duke-gold font-mono font-bold">
+                      #{lesson.data.chapterNumber.toString().padStart(2, '0')}
+                    </span>
+                    {lesson.data.videoUrl && (
+                       <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">Video</span>
+                    )}
+                  </div>
+                  <h3 class="text-xl font-bold group-hover:text-blue-700 transition-colors">
+                    {lesson.data.title}
+                  </h3>
+                </div>
+                
+                <div class="mt-6 flex items-center text-sm font-bold text-blue-900 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Start Lesson <span class="ml-2">→</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

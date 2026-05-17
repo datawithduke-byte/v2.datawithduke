@@ -20,6 +20,19 @@ const { title, description = "Data Literacy for the Curious." } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Data With Duke</title>
+
+		<!-- 1. The Modern standard (pointing to your SVG inside Favicon) -->
+		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+
+		<!-- 2. The Apple Touch Icon (for mobile bookmarks) -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+
+		<!-- 3. PNG backups for various browser tabs -->
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+
+		<!-- 4. The Legacy Fallback (the classic ICO) -->
+		<link rel="alternate icon" type="image/x-icon" href="/favicon/favicon.ico" />
 		
 		<!-- Google Fonts: Inter and JetBrains Mono -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,8 +45,13 @@ const { title, description = "Data Literacy for the Curious." } = Astro.props;
 		<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
 			<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 				<a href="/" class="flex items-center space-x-2 group">
-					<div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shadow-blue-900/20">
-						<span class="text-amber-400 font-bold text-xl">D</span>
+					<div class="w-10 h-10 transition-transform group-hover:scale-105">
+						<img 
+						src="/assets/base_layout_logo.png" 
+						alt="Data With Duke Logo" 
+						class="w-full h-full object-contain rounded-lg shadow-md shadow-blue-950/10"
+						onerror="this.onerror=null; this.src='/favicon/favicon-32x32.png';" 
+						/>
 					</div>
 					<span class="font-bold text-xl tracking-tight text-blue-900 uppercase">Data With Duke</span>
 				</a>

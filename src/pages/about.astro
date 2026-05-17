@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About | Data With Duke">
+  <main class="max-w-4xl mx-auto px-4 py-20">
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl font-black text-blue-900 mb-6">About the Project</h1>
+      <p class="text-xl text-slate-600 leading-relaxed">
+        Data isn't just for spreadsheets and algorithms. It's the story of our lives.
+      </p>
+    </header>
+
+    <div class="prose prose-slate lg:prose-xl max-w-none 
+                prose-headings:text-blue-900 prose-headings:font-bold
+                prose-p:leading-relaxed">
+      
+      <h2>Why "Data With Duke"?</h2>
+      <p>
+        The goal here is simple: to bridge the gap between technical data engineering 
+        and everyday decision-making. I believe that data literacy is a fundamental 
+        skill for the 21st century.
+      </p>
+
+      <blockquote>
+        "Helping you take ownership of the data that impacts your life."
+      </blockquote>
+
+      <h2>What we cover</h2>
+      <ul>
+        <li><strong>Critical Thinking:</strong> How to spot bad statistics in the wild.</li>
+        <li><strong>Tool Mastery:</strong> From Excel basics to Python automation.</li>
+        <li><strong>Data Ethics:</strong> Privacy, AI transparency, and the internet of things.</li>
+      </ul>
+
+      <div class="mt-12 p-8 bg-blue-50 rounded-3xl border border-blue-100">
+        <h3 class="mt-0">AI Transparency</h3>
+        <p class="mb-0">
+          We practice what we preach. For more on how we use technology to build this site, 
+          check out our <a href="/transparency">AI Transparency Statement</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

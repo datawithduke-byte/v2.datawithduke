@@ -2,29 +2,43 @@
 import { getEntry, getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// [Persona: WebDev] Logic:
-// 1. Fetch the homepage settings from our JSON "Data" collection
-// This allows you to update the Hero text via Decap CMS on the go.
-const homeSettings = await getEntry('homepage', 'index');
-
-// Safety check: if the JSON file isn't created yet, we provide defaults
-const { 
-  heroTitle = "Hi, I'm Duke.", 
-  heroSubtitle = "Data isn't mystical. Let's take ownership of it.", 
-  ctaText = "Explore the Data", 
-  featuredPostSlug 
-} = homeSettings?.data || {};
-
-// 2. Fetch the specific featured blog post using the slug from the JSON
-let featuredPost;
-if (featuredPostSlug) {
-  featuredPost = await getEntry('blog', featuredPostSlug);
+// 1. Fetch the homepage settings with a total safety net
+let homeSettings = null;
+try {
+  homeSettings = await getEntry('homepage' as any, 'index' as any);
+} catch (e) {
+  console.error("Homepage data not found in src/content/homepage/index.json", e);
 }
 
-// Fallback: If no slug is set, just grab the most recent post
-if (!featuredPost) {
-  const allPosts = await getCollection('blog');
-  featuredPost = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+// Extract data with absolute defaults
+const heroTitle = homeSettings?.data?.heroTitle ?? "Hi, I'm Duke.";
+const heroSubtitle = homeSettings?.data?.heroSubtitle ?? "Data isn't mystical. Let's take ownership of it.";
+const ctaText = homeSettings?.data?.ctaText ?? "Explore the Data";
+const featuredPostSlug = homeSettings?.data?.featuredPostSlug;
+
+// [Persona: WebDev] Custom Dynamic Image Bank logic:
+// We grab the current set index from Decap CMS and build our image path.
+const heroImageNum = homeSettings?.data?.heroImageNumber ?? 1;
+const heroImageUrl = `/assets/uploads/hero_${heroImageNum}.png`;
+
+// 2. Fetch the featured blog post
+let featuredPost = null;
+try {
+  if (featuredPostSlug) {
+    featuredPost = await getEntry('blog' as any, featuredPostSlug);
+  }
+
+  // Fallback: If no slug is set, grab the most recent post
+  if (!featuredPost) {
+    const allPosts = await getCollection('blog' as any);
+    if (allPosts && allPosts.length > 0) {
+      featuredPost = allPosts.sort((a, b) => 
+        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+      )[0];
+    }
+  }
+} catch (e) {
+  console.warn("Could not load featured post", e);
 }
 ---
 
@@ -71,6 +85,11 @@ if (!featuredPost) {
             </a>
           </div>
           
+          <!-- 
+            [Persona: WebDev] Solution:
+            Instead of a static blue SVG container fallback, we now load the dynamic 
+            image bank asset 'heroImageUrl' if the featured post doesn't declare a unique heroImage.
+          -->
           <div class="order-1 md:order-2">
             {featuredPost.data.heroImage ? (
               <img 
@@ -79,12 +98,12 @@ if (!featuredPost) {
                 class="rounded-3xl shadow-2xl object-cover h-80 w-full hover:scale-[1.02] transition-transform duration-500"
               />
             ) : (
-              <div class="h-80 w-full bg-blue-900 rounded-3xl flex items-center justify-center text-white/20">
-                <!-- Fallback icon or pattern -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
+              <img 
+                src={heroImageUrl} 
+                alt={featuredPost.data.title} 
+                class="rounded-3xl shadow-2xl object-cover h-80 w-full hover:scale-[1.02] transition-transform duration-500"
+                onerror="this.onerror=null; this.src='/assets/uploads/hero-1.jpg';"
+              />
             )}
           </div>
         </div>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 1. Generate paths for all blog posts in src/content/blog
+export async function getStaticPaths() {
+  const podcastEpisodes = await getCollection('podcast');
+  return podcastEpisodes.map(entry => ({
+    params: { slug: entry.slug }, 
+    props: { entry },
+  }));
+}
+
+// 2. Get the specific post data from props[cite: 1, 2]
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Format the date based on your config.ts schema[cite: 1, 3]
+const formattedDate = entry.data.pubDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={entry.data.title}>
+  <article class="max-w-4xl mx-auto px-4 py-16">
+    <header class="mb-12 border-b border-slate-200 pb-8">
+      <time datetime={entry.data.pubDate.toISOString()} class="text-slate-500">
+        {formattedDate}
+      </time>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 mt-4 mb-4">
+        {entry.data.title}
+      </h1>
+      <p class="text-xl text-slate-600 italic leading-relaxed">
+        {entry.data.description}
+      </p>
+    </header>
+
+    <div class="prose prose-slate lg:prose-xl max-w-none">
+      <Content />
+    </div>
+
+    <footer class="mt-20 pt-8 border-t border-slate-200">
+      <a href="/podcast" class="text-blue-900 font-bold hover:underline">
+        ← Back to all posts
+      </a>
+    </footer>
+  </article>
+</BaseLayout>
+

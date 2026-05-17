@@ -7,6 +7,7 @@ media_folder: "public/assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
+  # 1. Blog Posts
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"
@@ -16,30 +17,63 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
       - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
       - { label: "Tags", name: "tags", widget: "list", default: ["general"] }
       - { label: "Body", name: "body", widget: "markdown" }
 
+  # 2. Podcast Episodes
+  - name: "podcast"
+    label: "Podcast Episodes"
+    folder: "src/content/podcast"
+    create: true
+    slug: "s{{seasonNumber}}e{{episodeNumber}}-{{slug}}"
+    fields:
+      - { label: "Episode Number", name: "episodeNumber", widget: "number", value_type: "int" }
+      - { label: "Season Number", name: "seasonNumber", widget: "number", default: 1, value_type: "int" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Audio URL (Optional)", name: "audioUrl", widget: "string", required: false }
+      - { label: "YouTube URL (Optional)", name: "youtubeUrl", widget: "string", required: false }
+      - { label: "Guest Name (Optional)", name: "guestName", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["podcast"] }
+      - { label: "Show Notes / Transcript", name: "body", widget: "markdown" }
+
+  # 3. Learning Curriculum (Lessons)
   - name: "learn"
     label: "Lessons"
     folder: "src/content/learn"
     create: true
+    slug: "ch{{chapterNumber}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Track", name: "track", widget: "select", options: ["excel", "python", "critical-thinking"] }
-      - { label: "Chapter Number", name: "chapterNumber", widget: "number" }
-      - { label: "Video URL", name: "videoUrl", widget: "string", required: false }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Track", name: "track", widget: "string", hint: "e.g., Python, Excel, Critical Thinking" }
+      - { label: "Season", name: "season", widget: "number", value_type: "int" }
+      - { label: "Chapter Number", name: "chapterNumber", widget: "number", value_type: "int" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Video URL (Optional)", name: "videoUrl", widget: "string", required: false }
+      - label: "Resources & Download Links"
+        name: "resources"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Resource Label", name: "label", widget: "string" }
+          - { label: "Download / Link URL", name: "url", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["education"] }
+      - { label: "Lesson Body", name: "body", widget: "markdown" }
 
-  - name: "podcast"
-    label: "Podcasts"
-    folder: "src/content/podcast"
-    create: true
-    fields:
-      - { label: "Episode Number", name: "episodeNumber", widget: "number" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "YouTube URL", name: "youtubeUrl", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+  # 4. Global Settings (Homepage)
+  - name: "settings"
+    label: "Site Settings"
+    delete: false
+    files:
+      - name: "homepage"
+        label: "Homepage Content"
+        file: "src/content/homepage/index.json"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "text" }
+          - { label: "CTA Button Text", name: "ctaText", widget: "string" }
+          - { label: "Featured Post Slug", name: "featuredPostSlug", widget: "string", required: false, hint: "Matches the slug of the blog post you want to feature on the homepage." }
+          - { label: "Hero Image Number", name: "heroImageNumber", widget: "number", default: 1, value_type: "int", hint: "Choose an index number (1-5) from your image bank." }

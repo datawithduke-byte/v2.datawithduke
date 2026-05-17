@@ -1,18 +1,22 @@
 import { defineConfig } from 'astro/config';
 import tailwindv4 from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 /**
- * [Persona: WebDev] Critical Update:
- * We are moving to Tailwind v4 native Vite integration.
- * This resolves the ERESOLVE conflict with @astrojs/tailwind.
+ * Need to run 'npm install @astrojs/sitemap' in your terminal.
+ * The 'site' property is required for the sitemap to generate absolute URLs.
  */
 
 export default defineConfig({
+  // Replace this with your actual production URL
+  site: 'https://datawithduke.com',
+  
+  integrations: [sitemap()],
+
   vite: {
     plugins: [tailwindv4()],
   },
   
-  // Keep the directory format for our /admin route
   build: {
     format: 'directory'
   },
