@@ -5,7 +5,7 @@ description: "In this special live debate crossover with Frontal Plays, we tackl
 seasonNumber: 0
 episodeNumber: 1
 youtubeUrl: "https://www.youtube.com/watch?v=yvn9nX_2LVc"
-tags: ["is ai moral", "ai ethics", "frontal plays", "data with duke", "anthropomorphic trap", "neoluddism", "ai theft", "copyright", "data literacy", "critical thinking", "future of work", "ai slop", "philosophy"]Watch the video on YouTubeSeason 0 Episode 1 – Is AI Moral? (feat. Frontal Plays)
+tags: ["is ai moral", "ai ethics", "frontal plays", "data with duke", "anthropomorphic trap", "neoluddism", "ai theft", "copyright", "data literacy", "critical thinking", "future of work", "ai slop", "philosophy"]
 ---
 
 ## Watch the video on YouTube
