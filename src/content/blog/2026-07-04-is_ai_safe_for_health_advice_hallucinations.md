@@ -17,7 +17,7 @@ This is a story all about how my life got twist-turned upside down and I'd like 
 
 What this actually is dear reader is another story upon the countess of others. You probably heard of the importance of trying to keep motivation and habit.
 
-You see what I had actually done is the same thing that I have done in my life many many times before and I'm sure that many of you reading this will probably say you've done the same and that is I was on a high a very big high where my career was going well. My family life was going well. Everything was actually going pretty well for me. So I thought let's take on another task where I've started this website and blog and podcast and then life kind of got in the way a little bit and all of a sudden two 3-4 months have passed and I haven't created any new content.
+You see what I had actually done is the same thing that I have done in my life many many times before. I'm sure that many of you reading this will probably say you've done the same.s I was on a high - a very big high where my career was going well. My family life was going well. Everything was actually going pretty well for me. So I thought let's take on another task where I've started this website, blog, and podcast and then... well... life kind of got in the way a little bit and all of a sudden four months have passed and I haven't created any new content.
 
 Don't get me wrong. I was having a good time of it all. I was spending a lot of time with my family. I was reigniting my love for certain games that I used to play as a child/teen/young adult, played tennis for the first time in over a decade…
 
