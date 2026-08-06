@@ -12,7 +12,7 @@ tags: ["Artificial Intelligence", "Machine Learning", "AI Art", "Creativity", "C
 
 ---
 
-# Season 2 Episode 1 – Why is everything getting worse?
+# Season 2 Episode 1 – Can AI understand Art?
 
 ---
 
@@ -98,9 +98,7 @@ And the question that we're going to try and cover off today is: can a machine d
 
 Today I'm going to try and actually go quite microscopic. I'm going to look at how data scientists are using AI almost as an art history detective to solve 400-year-old cold cases, and how artists are actually striking back by using raw data as their new paint.
 
-So let's press some buttons and let's have a look at some cases. Let me pop back here—I'm still new to this, give me a second. So we have this case right now that's going on... It's not this one, give me one second... Here we go, this is it! I lost it. Fortunately, I can edit this out. Yeah, I've got it, I've got it. So I can edit this bit out, right? I'm just talking to myself.
-
-Okay, so wrong way! Check this one out, okay?
+So let's press some buttons and let's have a look at some cases.
 
 This is a real study out of Case Western Reserve University. When you and I—maybe most of us—look at a classic oil painting, we see color, we see subject, we see possibly emotion. But these absolute madmen in the physics and data science departments looked at a 400-year-old Renaissance painting and said: "Do you know what? That's not art. That is a 3D elevation map."
 
